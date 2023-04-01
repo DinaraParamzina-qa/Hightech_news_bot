@@ -16,8 +16,7 @@ def send_welcome(message):
     keyboard = types.ReplyKeyboardMarkup()
     # добавляем кнопки
     keyboard.add(types.KeyboardButton('Свежая новость 🆕'), 
-                 types.KeyboardButton('Последние 3 новости 📰'),
-                 types.KeyboardButton('Показать 5 новостей 📚'))
+                 types.KeyboardButton('Последние 3 новости 📰'))
     # отправляем сообщение с приветствием и клавиатурой
     bot.reply_to(message, "Привет! Я бот, который выдаёт новости с сайта 3dnews.ru Нажми одну из кнопок, чтобы получить новости.", reply_markup=keyboard)
 
@@ -58,14 +57,6 @@ def send_last_3_news(message):
         news = get_news()
         latest_3_news = news[:3]
         text = format_news(latest_3_news)
-        bot.send_message(message.chat.id, text)
-
-# команда для обработки нажатия на кнопку "Поcледние 5 новостей"
-@bot.message_handler(func=lambda message: message.text == 'Показать 5 новостей📚')
-def send_last_5_news(message):
-        news = get_news()
-        latest_5_news = news[:5]
-        text = format_news(latest_5_news)
         bot.send_message(message.chat.id, text)
 
 # запускаем бота
